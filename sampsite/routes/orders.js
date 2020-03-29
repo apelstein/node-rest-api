@@ -67,9 +67,22 @@ router.post('/', (req, res, next) => {
 });
 
 router.get('/:orderId', (req, res, next) => {
-    res.status(200).json({
-        message: 'Order details',
-        orderId: req.params.orderId
+    Order.findById(req.params.orderId).select("_id product quantity").exec()
+        .then(order => {
+            if(!order) {
+                res.status(404).json({
+                    message: 'Order does not exist'
+                });
+            } else {
+                res.status(200).json({
+                    message: 'Order was found',
+                    created_order: order
+                });
+            }
+        }).catch(err => {
+            res.status(500).json({
+                error: err
+            });
     });
 });
 
