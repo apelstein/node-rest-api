@@ -8,7 +8,9 @@ const Product = require('../models/product');
 
 /* GET orders listing. */
 router.get('/', (req, res, next) => {
-  Order.find().select('_id product quantity').exec().then(docs => {
+  Order.find().select('_id product quantity')
+      .populate('product', 'name')
+      .exec().then(docs => {
       const response = {
           count: docs.length,
           orders: docs.map(doc => {
