@@ -25,6 +25,8 @@ mongoose.connect('mongodb+srv://giladap:'+process.env.MONGO_ATLAS_PASSWORD +'@cl
 });
 
 app.use(logger('dev'));
+
+app.use('/uploads', express.static('uploads'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
