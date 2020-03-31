@@ -6,7 +6,7 @@ var logger = require('morgan');
 
 var productsRouter = require('./routes/products');
 var ordersRouter = require('./routes/orders');
-
+var uRouter = require('./routes/users');
 const bodyParser = require('body-parser');
 
 var app = express();
@@ -44,6 +44,7 @@ app.use((req, res, next) => {
 
 app.use('/products', productsRouter);
 app.use('/orders', ordersRouter);
+app.use('/users', uRouter);
 
 // app.use((req, res, next) => {
 //   res.status(200).json({
